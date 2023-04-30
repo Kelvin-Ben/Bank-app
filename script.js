@@ -111,6 +111,33 @@ tabsContainer.addEventListener("click", function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add("operations__content--active");
 });
+
+// menu fade animation
+const handleHover = function (e) {
+  if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
+    const logo = link.closest(".nav").querySelector("img");
+    siblings.forEach((el) => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+const nav = document.querySelector(".nav");
+nav.addEventListener("mouseover", handleHover.bind(0.5));
+nav.addEventListener("mouseout", handleHover.bind(1));
+
+//sticky Navigation
+const initalCoords = section1.getBoundingClientRect();
+console.log(initalCoords);
+
+window.addEventListener("scroll", function () {
+  // console.log(window.scrollY);
+  if (window.scrollY > initalCoords.top) nav.classList.add("sticky");
+  else nav.classList.remove("sticky");
+});
+// Sticky Navigation: Intersection Observer API
 /*
 const h1 = document.querySelector('h1')
 const alert1 = function(e) {
